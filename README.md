@@ -40,11 +40,11 @@ $$
 \right.
 $$
 
-where $k_N$ is the cutoff wave number, $E_{k_N}$ is its corresponding energy, $m$ is the slope of the inertial region of the energy spectrum, and $C_K$ is the Kolmogorov constant. For the 1D Burgers equation $m = 2$ and $ C_k \approx 0.4523$.
+where $k_N$ is the cutoff wave number, $E_{k_N}$ is its corresponding energy, $m$ is the slope of the inertial region of the energy spectrum, and $C_K$ is the Kolmogorov constant. For the 1D Burgers equation $m = 2$ and $C_k \approx 0.4523$.
 
 ## Numerical Method
 
-The forward Euler formula can easily discretize equations \ref{eq:1.2} and \ref{eq:1.3}. However, the triadic convection term should be split into a summation in terms of $p$ and $q$ for the sake of coding. For any $0 \leq k \leq N $, $\sum_{k=p+q} = \left.\sum_{p = k-N}^{N}\right|_{q =k-p}$. Therefore, \autoref{eq:1.3} can be discretized as:
+The forward Euler formula can easily discretize the equations. However, the triadic convection term should be split into a summation in terms of $p$ and $q$ for the sake of coding. For any $0 \leq k \leq N $, $\sum_{k=p+q} = \left.\sum_{p = k-N}^{N}\right|_{q =k-p}$. Therefore, the equation can be discretized as:
 
 $$ \hat{u}_k^{n+1} = \hat{u}_k^{n} + \Delta t \cdot (-\left.\sum_{p = k-N}^{N}\right|_{q =k-p}\hat{u}_p^{n} i q \hat{u}_q^{n} -k^2\nu_{eff}(k) \hat{u}_k^{n}) \quad k=0, \ldots, N $$
 
@@ -58,18 +58,19 @@ $$ \hat{E}_k^{n} = \hat{u}_k^{n} \overline{\hat{u}_k^{n}} $$
 
 ## Results and Discussion
 
-Figure~\ref{fig:Ek} presents the energy spectrum for different scenarios. For $Re = 40$, a cutoff wave number of 100 captures the energy spectrum up to the dissipation region. Conversely, the $N = 20$ case is limited to the inertial region, necessitating a turbulent viscosity model.
+The energy spectrum for different scenarios is presented in the figure below. For $Re = 40$, a cutoff wave number of 100 captures the energy spectrum up to the dissipation region. Conversely, the $N = 20$ case is limited to the inertial region, necessitating a turbulent viscosity model.
 
 The two LES cases illustrate the effect of $C_K$ on the spectrum. A too-small value for $C_K$ results in the dissipative region starting from smaller wave numbers, making the flow excessively dissipative, as observed in the $C_K = 0.05$ case.
 
 ![Energy spectrum of the steady-state solution of the Burgers equation for different cases.](https://github.com/user-attachments/assets/d7f895d4-f8af-4cd6-b292-576adfeb012c)
 
-Figure~\ref{fig:para} demonstrates a parametric study on the effect of $Re$ number on the energy spectrum. Increasing $Re$ makes the dissipative region appear at higher wave numbers, while the inertial region remains unaffected. This observation aligns with the expected behavior: for a given $k$, an increase in $Re$ leads to a decrease in viscosity, resulting in reduced diffusion.
+The effect of $Re$ number on the energy spectrum is shown in the figure below. Increasing $Re$ makes the dissipative region appear at higher wave numbers, while the inertial region remains unaffected. This observation aligns with the expected behavior: for a given $k$, an increase in $Re$ leads to a decrease in viscosity, resulting in reduced diffusion.
 
-For a given $k$: 
+For a given $k$:
+
 $$ Re \uparrow \quad \rightarrow \quad \nu \downarrow \quad \rightarrow \quad \nu \frac{\partial^2 u}{\partial x^2} \downarrow $$
 
-![Effect of $Re$ number on the energy spectrum. Blue curve: $Re = 200$, Orange curve: $Re = 500$.]([figs/parametric.jpg](https://github.com/user-attachments/assets/6f1cfb63-7f36-4179-82e2-7b6552d5023d))
+![Effect of $Re$ number on the energy spectrum. Blue curve: $Re = 200$, Orange curve: $Re = 500$.](https://github.com/user-attachments/assets/6f1cfb63-7f36-4179-82e2-7b6552d5023d)
 
 
 
